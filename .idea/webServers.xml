@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f67cc15a-426e-4ed7-9a59-9f474a2b4f0e" name="Uniserver" url="http://compute1.wmin.ac.uk">
+        <fileTransfer host="compute1.wmin.ac.uk" port="22" accessType="SFTP" password="df9fdf99dfe7dfcbdfd8dfd9dfc2dfcbdfc7dfd9dfdedfd8dfcfdfcfdfde" username="w1409831">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
