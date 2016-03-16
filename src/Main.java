@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.sql.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 class Main {
 
@@ -33,16 +35,18 @@ class Main {
                 login.init();
 
 
+
             }
         });
 
-       ConnectionDb d=new ConnectionDb();
-        try {
-            d.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        LogIn l = new LogIn();
+        l.connectiondb();
+
+
+        //ConnectionDb.getConnection();
+       // ConnectionDb.createTable();
     }
+
 
     }
 

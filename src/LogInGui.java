@@ -1,9 +1,9 @@
-import javafx.scene.control.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+
 /**
  * Created by Dario on 12/02/2016.
  */
@@ -11,14 +11,13 @@ public class LogInGui extends JFrame {
 
     final static private int WIDTH = 500;
     final static private int HEIGHT = 500;
+    User user =new User();
+    LogIn login= new LogIn();
+    private JPanel loginPanel;
+    private Container container;
+    private GridBagConstraints c = new GridBagConstraints();
+    private JPanel mainContainer;
 
-    protected JPanel loginPanel;
-    protected JLabel nameLabel ;
-    protected JLabel passwordLabel;
-    protected JLabel feedbackConnection;
-    protected JButton loginButton;
-    protected String username;
-    protected char[] password;
 
     LogInGui() {
 
@@ -30,6 +29,7 @@ public class LogInGui extends JFrame {
         super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        pack();
         super.setVisible(true);
 
 
@@ -38,67 +38,107 @@ public class LogInGui extends JFrame {
 
 
     public void init() {
-
-        Container container = this.getContentPane();
-        loginPanel = new JPanel(new GridBagLayout());
-        loginPanel.setBackground(Color.GRAY);
-        container.add(loginPanel);
-        nameLabel = new JLabel("Name :");
-        passwordLabel = new JLabel("Password:");
-        loginButton = new JButton("Log In");
-        JTextField nameField= new JTextField();
-        JPasswordField passwordField = new JPasswordField();
-        feedbackConnection=new JLabel("Wrong Username/Password");
-        feedbackConnection.setVisible(true);
-        GridBagConstraints c = new GridBagConstraints();
-        nameField.setSize(new Dimension(100, 50));
+         container= this.getContentPane();
+         mainContainer=new JPanel();
+         loginPanel = new JPanel(new GridBagLayout());
+         loginPanel.setBackground(Color.GRAY);
+         mainContainer.add(loginPanel,BorderLayout.CENTER);
 
 
+
+
+        JLabel nameLabel = new JLabel("Name :");
         c.gridx = 0;
         c.gridy = 0;
         loginPanel.add(nameLabel, c);
 
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipadx = 150;      //make this component ta
+        JTextField nameField= new JTextField(15);
         c.gridx = 1;
         c.gridy = 0;
         nameField.setToolTipText("Please enter username");
         loginPanel.add(nameField, c);
 
 
-        c.ipadx = 0;
+          JLabel passwordLabel = new JLabel("Password:");
         c.gridx = 0;
         c.gridy = 1;
         loginPanel.add(passwordLabel, c);
 
+         JPasswordField passwordField = new JPasswordField(15);
         c.gridx = 1;
         c.gridy = 1;
         passwordField.setToolTipText("Please enter password");
         loginPanel.add(passwordField, c);
 
-        c.ipadx = 80;
-        c.ipady = 10;
-        c.gridx = 1;
-        c.gridy = 2;
+
+
+
+
+        JButton loginButton = new JButton("LogIn");
+
+        c.gridy = 3;
         loginPanel.add(loginButton, c);
 
+
+          JLabel feedbackConnection=new JLabel();
         c.gridx = 1;
         c.gridy = 4;
         loginPanel.add(feedbackConnection, c);
 
+
+
+
+
+
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                SwingWorker<Boolean,Void> worker=new SwingWorker<Boolean,Void>() {
+                    @Override
+                    protected Boolean doInBackground() throws Exception {
+                        String password="";
+                        char[] tmppw=passwordField.getPassword();
+                        for(int i=0;i<tmppw.length;i++){
+                            password+=tmppw[i];
+                        }
 
-                username=nameField.getText();
-                password=passwordField.getPassword();
-               if(isPasswordCorrect(password)){
+                        //System.out.println(password);
+                        user.setUsername(nameField.getText());
+                        user.setPassword(password);
 
-               }else{
-                   MainGui gui=new MainGui();
-                   gui.init();
-               }
-                System.out.println("Username : "+username);
+
+                        boolean conn=login.getUserDetails(user.getUsername(),user.getPassword());
+
+
+
+
+
+                        return conn;
+                    }
+
+                    @Override
+                    protected void done() {
+                        boolean connection;
+                        try{
+                            connection=get();
+                            if(connection){
+
+                                MainGui gui=new MainGui();
+
+                            }else{
+                                nameField.setText("");
+                                passwordField.setText("");
+                                feedbackConnection.setText("Wrong Username/Password");
+                            }
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+
+                worker.execute();
+
 
 
 
@@ -106,23 +146,13 @@ public class LogInGui extends JFrame {
 
         });
 
-        loginPanel.setVisible(true);
 
-
+        container.add(loginPanel);
 
 
 
     }
 
-    private static boolean isPasswordCorrect(char[] inputPassword) {
-        char[] actualPassword = { 'h', 'e', 'm', 'a', 'n', 't', 'h' };
-        if (inputPassword.length != actualPassword.length)
-            return false; // Return false if lengths are unequal
-        for (int i = 0; i < inputPassword.length; i++)
-        if (inputPassword[i] != actualPassword[i])
-            return false;
-        return true;
-    }
 
 
 

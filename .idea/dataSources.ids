@@ -8,33 +8,79 @@
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
     <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
       <schema id="1" name="cryptodb"/>
-      <table id="2" parent="1" name="table1"/>
-      <column id="3" parent="2" name="id">
+      <table id="2" parent="1" name="customers"/>
+      <table id="3" parent="1" name="rooms"/>
+      <table id="4" parent="1" name="users"/>
+      <column id="5" parent="2" name="customer_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="4" parent="2" name="Username">
-        <mandatory>1</mandatory>
+      <column id="6" parent="2" name="name">
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="5" parent="2" name="password">
-        <mandatory>1</mandatory>
-        <data-type>varchar(10000)</data-type>
+      <column id="7" parent="2" name="surname">
+        <data-type>varchar(255)</data-type>
       </column>
-      <column id="6" parent="2" name="Level">
+      <column id="8" parent="2" name="credit_card">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="9" parent="2" name="address">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="10" parent="2" name="postcode">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="11" parent="2" name="dateIn">
+        <data-type>date</data-type>
+      </column>
+      <column id="12" parent="2" name="dateOut">
+        <data-type>date</data-type>
+      </column>
+      <column id="13" parent="2" name="room_id">
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="14" parent="2" name="PRIMARY">
+        <columns>customer_id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="15" parent="3" name="room_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="7" parent="2" name="Name">
+      <column id="16" parent="3" name="roomNumber">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="17" parent="3" name="date">
+        <data-type>date</data-type>
+      </column>
+      <column id="18" parent="3" name="customer_id">
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="19" parent="3" name="PRIMARY">
+        <columns>room_id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="20" parent="4" name="idUser">
         <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="21" parent="4" name="name">
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="8" parent="2" name="Surname">
-        <mandatory>1</mandatory>
+      <column id="22" parent="4" name="surname">
         <data-type>varchar(255)</data-type>
       </column>
-      <key id="9" parent="2" name="PRIMARY">
-        <columns>id</columns>
+      <column id="23" parent="4" name="username">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="24" parent="4" name="password">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="25" parent="4" name="level">
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="26" parent="4" name="PRIMARY">
+        <columns>idUser</columns>
         <primary>1</primary>
       </key>
     </database-model>
