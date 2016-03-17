@@ -10,11 +10,11 @@ import java.sql.SQLException;
 public class LogIn{
     // JDBC driver name and database URL
 
-    static final String DB_URL = "jdbc:mysql://localhost:8889/cryptodb";
+    static final String DB_URL = "jdbc:mysql://localhost:2222/w1409831_0?verifyServerCertificate=false&useSSL=true&requireSSL=true";
 
     //  Database credentials
-    static final String USER = "root";
-    static final String PASS = "root";
+    static final String USER = "w1409831";
+    static final String PASS = "m1Gj6kC1IYUy";
 
    public void connectiondb(){
         Connection conn = null;

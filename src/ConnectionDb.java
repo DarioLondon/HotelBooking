@@ -10,52 +10,47 @@ import java.sql.SQLException;
 
 public class ConnectionDb {
 
-    static final String DB_URL = "jdbc:mysql://localhost:8889/cryptodb";
+
 
     //  Database credentials
-    static final String USER = "root";
-    static final String PASS = "root";
+    private static final String USER = "w1409831";
+    private static final String PASS = "m1Gj6kC1IYUy";
+    private static final String DATABASE="w1409831_0";
+    private static final String DB_URL = "jdbc:mysql://localhost:2222/"+DATABASE+"?verifyServerCertificate=false&useSSL=true&requireSSL=true";
 
-    public static Connection getConnection(){
-        Connection conn = null;
 
-        try{
+        public static  Connection getConnection() throws Exception{
+            Connection conn = null ;
 
-            //STEP 3: Open a connection
-            System.out.println("Connecting to a selected database...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("Connected database successfully...");
+            try{
+
+                //STEP 3: Open a connection
+                System.out.println("Connecting to a selected database => "+DATABASE);
+                conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                System.out.println("Connected database successfully...");
+
+
+
+            }catch(SQLException se){
+                //Handle errors for JDBC
+                se.printStackTrace();
+            }catch(Exception e){
+                //Handle errors for Class.forName
+                e.printStackTrace();
+            }
 
            return conn;
 
-        }catch(SQLException se){
-            //Handle errors for JDBC
-            se.printStackTrace();
-        }catch(Exception e){
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        }finally{
-
-            try{
-                if(conn!=null)
-                    conn.close();
-            }catch(SQLException se){
-                se.printStackTrace();
-            }//end finally try
-        }//end try
-
-        System.out.println("Goodbye!");
-        return null;
-    }
+        }
 
 
-   public static void createTable(){
-       Connection conn=getConnection();
+       public static void createTable() {
+       Connection conn=null;
        Statement stmt=null;
        try{
 
-
-           System.out.println("Creating table in given database...");
+           conn=getConnection();
+           System.out.println("Creating table in given database => "+DATABASE);
            stmt = conn.createStatement();
 
            String userTable = "CREATE TABLE IF NOT EXISTS users" +
@@ -91,7 +86,7 @@ public class ConnectionDb {
            stmt.executeUpdate(userTable);
            stmt.executeUpdate(hotelTable);
            stmt.executeUpdate(customerTable);
-           System.out.println("Created table in given database...");
+
        }catch(SQLException se){
            //Handle errors for JDBC
            se.printStackTrace();
@@ -103,18 +98,49 @@ public class ConnectionDb {
            try{
                if(stmt!=null)
                    conn.close();
+               System.out.println("Tables Created ");
            }catch(SQLException se){
            }// do nothing
            try{
                if(conn!=null)
                    conn.close();
+               System.out.println("Connection Close");
            }catch(SQLException se){
                se.printStackTrace();
            }//end finally try
        }//end try
-       System.out.println("Goodbye!");
 
 
+
+
+    }
+
+
+    public boolean Authenticate(String username,String password){
+
+        Connection conn;
+        Statement stmt;
+        boolean authentication=false;
+        try{
+           conn=getConnection();
+            stmt=conn.createStatement();
+
+            String USERAUTHENTICATION="SELECT username,password FROM users";
+           ResultSet result=stmt.executeQuery(USERAUTHENTICATION);
+           while(result.next()){
+               if((result.getString("username").equals(username))&&(result.getString("password").equals(password))){
+                   authentication=true;
+               }else{
+
+                   authentication=false;
+               }
+           }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return authentication;
 
     }
 

@@ -105,15 +105,16 @@ public class LogInGui extends JFrame {
                         //System.out.println(password);
                         user.setUsername(nameField.getText());
                         user.setPassword(password);
+                        ConnectionDb conn= new ConnectionDb();
 
 
-                        boolean conn=login.getUserDetails(user.getUsername(),user.getPassword());
+                        boolean authenticationSucces=conn.Authenticate(user.getUsername(),user.getPassword());
 
 
 
 
 
-                        return conn;
+                        return authenticationSucces;
                     }
 
                     @Override

@@ -1,17 +1,8 @@
-import sun.swing.SwingAccessor;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.Year;
-import java.util.Calendar;
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 import static java.awt.BorderLayout.*;
-import static java.awt.Font.BOLD;
 
 /**
  * Created by Dario on 22/02/2016.
@@ -23,7 +14,7 @@ public class MainGui extends JFrame {
     CalendarSystem cal= new CalendarSystem();
     private Header headerPanel;
     private CalendarSection calendarSection;
-    private JPanel TopPanel;
+    private JPanel topPanel;
 
 
 
@@ -35,39 +26,22 @@ public class MainGui extends JFrame {
        // super.setMaximumSize(new Dimension(WIDTH, HEIGHT));
         super.setTitle("Hotel Booking System:");
         super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-       // Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-       // this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         setLayout(new BorderLayout());
         headerPanel=new Header();
         calendarSection=new CalendarSection();
-        TopPanel=new JPanel();
-        TopPanel.setLayout(new BoxLayout(TopPanel,BoxLayout.Y_AXIS));
-        TopPanel.add(headerPanel);
-        TopPanel.add(calendarSection);
+        topPanel =new JPanel();
+        topPanel.setLayout(new BoxLayout(topPanel,BoxLayout.Y_AXIS));
+        topPanel.add(headerPanel);
+        topPanel.add(calendarSection);
         Container container = this.getContentPane();
-
-        container.add(TopPanel, NORTH);
-
-
+        container.add(topPanel, NORTH);
          pack();
         super.setVisible(true);
     }
 
     public void init() {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         SwingWorker<String[],Void> worker=new SwingWorker<String[],Void>() {

@@ -39,12 +39,15 @@ class Main {
             }
         });
 
-        LogIn l = new LogIn();
-        l.connectiondb();
+        //LogIn l = new LogIn();
+       // l.connectiondb();
 
-
-        //ConnectionDb.getConnection();
-       // ConnectionDb.createTable();
+        try {
+            ConnectionDb.getConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ConnectionDb.createTable();
     }
 
 
