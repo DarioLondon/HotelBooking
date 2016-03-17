@@ -4,9 +4,6 @@
 
 
 import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class ConnectionDb {
 
@@ -128,12 +125,7 @@ public class ConnectionDb {
             String USERAUTHENTICATION="SELECT username,password FROM users";
            ResultSet result=stmt.executeQuery(USERAUTHENTICATION);
            while(result.next()){
-               if((result.getString("username").equals(username))&&(result.getString("password").equals(password))){
-                   authentication=true;
-               }else{
-
-                   authentication=false;
-               }
+               authentication = (result.getString("username").equals(username)) && (result.getString("password").equals(password));
            }
 
         }catch(Exception e){
