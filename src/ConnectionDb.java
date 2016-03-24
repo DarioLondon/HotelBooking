@@ -4,6 +4,7 @@
 
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ConnectionDb {
 
@@ -62,10 +63,10 @@ public class ConnectionDb {
 
 
            String hotelTable = "CREATE TABLE IF NOT EXISTS rooms" +
-                   "(room_id INTEGER not NULL, " +
+                   "(room_id INTEGER NOT NULL, " +
                    " roomNumber INTEGER, " +
-                   " date DATE," +
-                   "customer_id int, " +
+                   "bedAvailable INTEGER," +
+                   "customer_id INT, " +
                    " PRIMARY KEY ( room_id ))";
 
            String  customerTable = "CREATE TABLE IF NOT EXISTS customers" +
@@ -113,20 +114,20 @@ public class ConnectionDb {
     }
 
 
-    public boolean Authenticate(String username,String password){
+    public boolean Authenticate(String username, String password) {
 
         Connection conn;
-        Statement stmt;
-        boolean authentication=false;
+        PreparedStatement stmt;
+        boolean authentication = false;
+        String USER_AUTHENTICATION = "SELECT * FROM users WHERE username=? AND password=?";
         try{
-           conn=getConnection();
-            stmt=conn.createStatement();
+            conn = getConnection();
+            stmt = conn.prepareStatement(USER_AUTHENTICATION);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet result = stmt.executeQuery();
 
-            String USERAUTHENTICATION="SELECT username,password FROM users";
-           ResultSet result=stmt.executeQuery(USERAUTHENTICATION);
-           while(result.next()){
-               authentication = (result.getString("username").equals(username)) && (result.getString("password").equals(password));
-           }
+            authentication = result.next();
 
         }catch(Exception e){
             e.printStackTrace();
@@ -134,6 +135,27 @@ public class ConnectionDb {
 
         return authentication;
 
+    }
+
+    public ArrayList<Room> getBookingData(ArrayList<Room> rooms) {
+
+        Connection conn = null;
+        Statement stm = null;
+        ArrayList<Customer> customers = null;
+        try {
+            conn = getConnection();
+            stm = conn.createStatement();
+            String DATA_BOOKING = "SELECT * FROM rooms ";
+            ResultSet result = stm.executeQuery(DATA_BOOKING);
+            while (result.next()) {
+
+                rooms.add(new Room(result.getInt("room_id"), result.getInt("roomNumber"), (Customer) result.getObject("customer"), result.getDate("checkIn"), result.getDate("checkOut")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return rooms;
     }
 
 

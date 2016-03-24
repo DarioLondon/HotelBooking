@@ -1,13 +1,12 @@
 import javax.swing.*;
-import java.sql.*;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.io.IOException;
+
 
 class Main {
 
-    public   static LogInGui login;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
+
 
 
       /* try {
@@ -31,11 +30,7 @@ class Main {
         }*/
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                login = new LogInGui();
-                login.init();
-
-
-
+                new LogInForm().setVisible(true);
             }
         });
 

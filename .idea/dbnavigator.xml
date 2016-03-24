@@ -23,11 +23,7 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="84750ae7-c4f0-4c71-8cfd-0012de342290">
-        <schema name="w1409831_0" object-types="column, constraint, function, index, procedure, table, dataset trigger, view" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="84750ae7-c4f0-4c71-8cfd-0012de342290">
@@ -63,7 +59,7 @@
           <description value="" />
           <database-type value="MYSQL" />
           <config-type value="BASIC" />
-          <database-version value="9999.0" />
+          <database-version value="5.5" />
           <driver-source value="BUILTIN" />
           <driver-library value="" />
           <driver value="" />

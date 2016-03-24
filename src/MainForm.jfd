@@ -1,0 +1,91 @@
+JFDML JFormDesigner: "5.2.3.0.281" Java: "1.8.0_40-release" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :::p, comp panel1:::::x, space :::p}}"
+			"$verticalGroup": "par l {seq t {space :::x, comp panel1:::p::p, space :::p}}"
+		} ) {
+			name: "this"
+			"background": new java.awt.Color( 63, 63, 63, 255 )
+			"defaultCloseOperation": 3
+			"iconImage": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			"autoRequestFocus": false
+			"alwaysOnTop": true
+			"title": "Hotel Booking System"
+			auxiliary() {
+				"JavaCodeGenerator.variableModifiers": 0
+			}
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {par l {seq {space :p:312:p, comp button1:::::x, space :p:159:p, comp settingButton:::p:56:p, space :::p, comp logOutButton:::p:56:p, space :::p, comp helpButton:::p:56:p}, seq t {space :::p, comp tabbedPane1::::1174:x}}, space :::p}}"
+				"$verticalGroup": "par l {seq {par l {comp helpButton::l:p:40:p, comp logOutButton::l:p:40:p, comp settingButton::l:p:40:p, comp button1::l:p:162:p}, space s:::p, comp tabbedPane1:::p::p, space ::46:x}}"
+			} ) {
+				name: "panel1"
+				"background": new java.awt.Color( 63, 63, 63, 255 )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "settingButton"
+					"icon": &SwingIcon0 new com.jformdesigner.model.SwingIcon( 1, "/Users/Dario/Developmet/Java/HotelBooking/src/Resources/settings-icon.png" )
+					"background": &Color0 new java.awt.Color( 255, 255, 255, 255 )
+					"border": &LineBorder0 new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
+					"borderPainted": false
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "helpButton"
+					"icon": #SwingIcon0
+					"background": #Color0
+					"border": #LineBorder0
+					"borderPainted": false
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "logOutButton"
+					"icon": #SwingIcon0
+					"background": #Color0
+					"border": #LineBorder0
+					"borderPainted": false
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button1"
+					"enabled": false
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "/Users/Dario/Desktop/logo.jpg" )
+					"borderPainted": false
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				} )
+				add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+					name: "tabbedPane1"
+					"background": new javax.swing.plaf.ColorUIResource( 255, 255, 255 )
+					"border": new javax.swing.border.EtchedBorder( 1, null, null )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {space :0:1131:x}"
+						"$verticalGroup": "par l {space :0:509:x}"
+					} ) {
+						name: "panel2"
+						"background": new java.awt.Color( 255, 255, 255, 255 )
+						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					}, new FormLayoutConstraints( null ) {
+						"title": "CALENDAR"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {space :0:1165:x}"
+						"$verticalGroup": "par l {space :0:539:x}"
+					} ) {
+						name: "panel3"
+					}, new FormLayoutConstraints( null ) {
+						"title": "CREATE BOOKING"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {space :0:1165:x}"
+						"$verticalGroup": "par l {space :0:539:x}"
+					} ) {
+						name: "panel4"
+					}, new FormLayoutConstraints( null ) {
+						"title": "ROOM STATUS"
+					} )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 1200, 830 )
+		} )
+	}
+}
